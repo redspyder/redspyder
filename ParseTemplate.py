@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 
 #################################################################
 # Class ParseTemplate
+# Jeff Toy
 class ParseTemplate:
     templateDict = {}
     # Constructor
