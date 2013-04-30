@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <TESTS>
   <TEST>
-    <ARGUMENT name="LIST_CONTENTS_SHORT"></ARGUMENT>
+    <ARGUMENT name="LIST_CONTENTS_SHORT">blah</ARGUMENT>
     <ARGUMENT name="LIST_CONTENTS_LONG"></ARGUMENT>
   </TEST>
   <TEST>
