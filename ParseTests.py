@@ -20,7 +20,7 @@ class ParseTests:
 
     def malformedFile(self):
         # TODO: Create error file code
-        print "Error File"
+        print("Error File")
             
     def checkFile(self):
         # TODO: Revise this

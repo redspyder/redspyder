@@ -11,7 +11,7 @@ def createTestCommands(tmplDict, test):
     command = tmplDict["Program"] + " "
     for arg in test:    
         command += tmplDict[arg[0]] + arg[1] + " "
-    print command                
+    print(command)                
 
 
 main()
