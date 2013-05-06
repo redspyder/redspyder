@@ -19,10 +19,16 @@ def uploader(student, assn, stage, upload_file):
 		'8091', 'group6_db')
 	
 		cursor = con.cursor()
-		
-		cursor.execute("INSERT INTO Reports SET %s = '%s'" %
-			(mdb.escape_string(stage), mdb.escape_string(upload))
-			WHERE sid = "%s" AND aid = "%s" % (student, assn))
+		cursor.execute("SELECT * FROM Reports WHERE sid='student' AND aid='assn'")
+		numrows = cursor.rowcount
+		if rowcount < 1:
+			cursor.execute("INSERT INTO Reports (%s)  VALUES('%s')" %
+				(mdb.escape_string(stage), mdb.escape_string(upload))
+				WHERE sid = "%s" AND aid = "%s" % (student, assn))
+		else:
+			cursor.execute("UPDATE Reports SET %s = '%s'" %
+				(mdb.escape_string(stage), mdb.escape_string(upload))
+				WHERE sid = "%s" AND aid = "%s" % (student, assn))
 		
 		con.commit()
 		
@@ -40,10 +46,10 @@ def reporter(student, assn):
 		cursor = con.cursor
 		
 		cursor.execute("SELECT stage1, stage2, stage3, stage4 FROM Reports\
-		WHERE sid='student', and aid='assn'" DESC)
+		WHERE sid='student', and aid='assn' DESC")
 		
 		numrows = cursor.rowcount
-		rows = curosr.fetchall()
+		rows = cursor.fetchall()
 		
 		fd = open('report.txt','a')
 		
