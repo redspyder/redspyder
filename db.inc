@@ -1,8 +1,8 @@
 <?php
-	$host = "mysql.cs.orst.edu";
-	$database = "cs419_haroldl";
-	$username = "cs419_haroldl";
-	$password = "8091";
+	$host = "localhost";
+	$database = "cs419";
+	$username = "LaraMartin";
+	$password = "ryleedog";
 	
 	function showerror() {
 		die("Error" . mysqli_errno() . " : " . mysqli_error());
