@@ -18,8 +18,11 @@ class PositiveTestCase(unittest.TestCase):
 class FileNotFoundCase(unittest.TestCase):
 	def runTest(self):
 		"""Negative test case"""
-		decompressor.decompress(CWD)
+		decompressor.decompress(os.getcwd())
 		
 	
 if __name__ == '__main__':
-    unittest.main()
+	##print os.getcwd()
+	##print os.path.isdir(FILEPATH)
+	##print os.path.isfile(FILEPATH+'/CS311_proj5_LaraMartin.tbz2')
+	unittest.main()
