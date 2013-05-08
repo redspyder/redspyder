@@ -4,6 +4,7 @@ import os
 
 CWD = os.getcwd()
 FILEPATH = CWD + '/test_files'
+EMPTY_FILEPATH = CWD + '/empty_testdir'
 
 class PositiveTestCase(unittest.TestCase):
 	def runTest(self):
@@ -15,14 +16,12 @@ class PositiveTestCase(unittest.TestCase):
 			self.assertIn(c, files)
 	
 ## Negative test cases
-class FileNotFoundCase(unittest.TestCase):
+class NoTBZ2FileCase(unittest.TestCase):
 	def runTest(self):
 		"""Negative test case"""
-		decompressor.decompress(os.getcwd())
-		
+		decompressor.decompress(EMPTY_FILEPATH)
+		files = os.listdir(EMPTY_FILEPATH)
+		self.assertEqual(files, [])
 	
 if __name__ == '__main__':
-	##print os.getcwd()
-	##print os.path.isdir(FILEPATH)
-	##print os.path.isfile(FILEPATH+'/CS311_proj5_LaraMartin.tbz2')
 	unittest.main()
