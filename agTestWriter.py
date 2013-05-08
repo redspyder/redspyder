@@ -1,21 +1,14 @@
-import ParseTemplate, subprocess
+import ParseTemplate
 import ParseTests
 
 ##################################################################################################################################
-# Class agTestExecutor
+# Class agTestWriter
 # Author: Jeff Toy
 # Usage:
-#   agTestExecutor(Test File)
-#       Test File: text file of commands for testing student submissions.  One command per line.
 # output:
-#   output.txt of test results
 ##################################################################################################################################
 
-def class agTestExecutor:
-
-    # Constructor
-    def __init__(self, test_file):
-        assert(test_file != "")
+#TODO: move code to class agTestWriter
 
 def main():
     f = open('output.txt', 'w')
