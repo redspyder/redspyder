@@ -22,14 +22,15 @@ def uploader(student, assn, stage, upload_file):
 		cursor.execute("SELECT * FROM Reports WHERE sid='student' AND aid='assn'")
 		numrows = cursor.rowcount
 		if rowcount < 1:
-			cursor.execute("INSERT INTO Reports (%s)  VALUES('%s')" %
-				(mdb.escape_string(stage), mdb.escape_string(upload))
-				WHERE sid = "%s" AND aid = "%s" % (student, assn))
+			cursor.execute("INSERT INTO Reports ('%s') VALUES('%s')\
+                        WHERE sid = '%s' AND aid = '%s'" %
+                        mdb.escape_string(stage), mdb.escape_string(upload),
+                        student, assn)
 		else:
-			cursor.execute("UPDATE Reports SET %s = '%s'" %
-				(mdb.escape_string(stage), mdb.escape_string(upload))
-				WHERE sid = "%s" AND aid = "%s" % (student, assn))
-		
+			cursor.execute("UPDATE Reports SET '%s' = '%s'\
+                        WHERE sid = '%s' AND aid = '%s'" %
+                        mdb.escape_string(stage), mdb.escape_string(upload),
+                        student, assn)
 		con.commit()
 		
 		cursor.close()
@@ -49,13 +50,12 @@ def reporter(student, assn):
 		WHERE sid='student', and aid='assn' DESC")
 		
 		numrows = cursor.rowcount
-		rows = cursor.fetchall()
+		row = cursor.fetchone()
 		
 		fd = open('report.txt','a')
 		
-		for row in rows:
-			for col in rows:
-				fd.write(%s\n % col)
+		for col in row:
+				fd.write("%s\n" % col)
 				fd.write('------------------------------------------------\
 					---------------------------------------')
 		
