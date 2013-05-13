@@ -19,9 +19,10 @@ students = os.listdir(args.hw_folder)
 
 ## Stage 1 = decompression
 if 1 in args.stage:
-	for s in students:
-		decompressor.decompress(s)
-	## if error that prevents continuation occurs, exit program
+    for s in students:
+        s_path = os.path.join(args.hw_folder, s)
+        decompressor.decompress(s_path)
+## if error that prevents continuation occurs, exit program
 	
 ## Stage 2 = compilation
 if 2 in args.stage:
