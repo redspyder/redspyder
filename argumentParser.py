@@ -12,6 +12,7 @@ def parseArgs(args):
 	parser.add_argument("--stage", help="which stage of autograder to run", type=int, action="append")
 	parser.add_argument("--timeout", help="timeout for autograder (in minutes)", type=int)
 	parser.add_argument("--test", help="test file to run on assignment", action="append", type=argparse.FileType('r'))
+    parset.add_argument("--template", help="template file submitted by students", action="append", type=argparse.FileType('r'))
 	args = parser.parse_args()
 	
 	return args
