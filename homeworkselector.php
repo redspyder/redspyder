@@ -43,6 +43,8 @@
 	$mysqli->close();
 ?>
 </select>
+<label>Student ID</label>
+<input type="text"></input>
 <input type="submit" value="Get Report"></input>
 </form>
 </body>
