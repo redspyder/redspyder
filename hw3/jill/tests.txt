@@ -1,0 +1,2 @@
+prog -t blah --terse  
+prog --terse  -t  

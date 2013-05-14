@@ -1,0 +1,1 @@
+gcc -o myar -g myar.c -Wall -fpic
