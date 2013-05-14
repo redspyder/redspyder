@@ -15,16 +15,14 @@ import os, subprocess, time
 
 class agCompile:
 
-    def __init__(self, topHwFolder, pName):
+    def __init__(self, topHwFolder):
         assert(topHwFolder != "")
-        assert(pName != "")
         self.errs = 0
         self.topFolder = topHwFolder
-        self.programName = pName
-        if(not os.path.isdir(self.topFolder)):
-            print("Invalid input folder.")
-            self.errs += 1
-            return
+#        if(not os.path.isdir(self.topFolder)):
+#            print("Invalid input folder.")
+#            self.errs += 1
+#            return
             
         self.folders = self.getSubfolders(self.topFolder)
         self.makeAll(self.folders)
@@ -45,7 +43,7 @@ class agCompile:
                 
     def getSubfolders(self, parentFolder):
         folderlist = []
-        os.chdir(parentFolder)
+#        os.chdir(parentFolder)
         students = os.listdir("./")
         for f in students:
             if(os.path.isdir(f)):
@@ -58,19 +56,10 @@ class agCompile:
                         
     def runMake(self,folder):
         os.chdir(folder)
-        if(os.path.isfile(self.programName)):
-            os.rename(self.programName, self.programName+".old("+str(time.asctime())+")")
         if(os.path.isfile("./makefile") or os.path.isfile("./Makefile")):
-            popen = subprocess.Popen(["make", "--silent"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            out,err = popen.communicate()
-            if(os.path.isfile(self.programName)):
-                self.outputFile("Output: "+out+"\n")
-                self.outputFile("Warnings/Errors:\n"+err+"\n")
-            else:
-                self.errorFile("Failed to compile "+self.programName+" in folder "+os.getcwd()+"\n")
-                self.errorFile("Warnings/Errors:\n"+err+"\n")
-                
-            
+            with open ('output2.txt', 'w') as output:
+                popen = subprocess.Popen(["make"], stdout=output, stderr=output)
+                out,err = popen.communicate()
         else:
             self.errorFile("Did not find a makefile.\n")
         

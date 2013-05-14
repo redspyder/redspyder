@@ -1,7 +1,8 @@
 import argumentParser
 import decompressor
-import agCompile
-import agTestExecutor
+from agCompile import *
+from agTestWriter import *
+from agTestExecutor import *
 import uploader
 import sys
 import os
@@ -27,7 +28,7 @@ if 1 in args.stage:
 ## Stage 2 = compilation
 if 2 in args.stage:
 	for s in students:
-		agCompile(args.hw_folder, s)
+		agCompile(args.hw_folder)
 	## if error that prevents continuation occurs, exit program
 
 ## Stage 3 = testing
