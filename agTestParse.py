@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-
+import os
 ##################################################################################################################################
 # Class agTestParse
 # Author: Jeff Toy
@@ -13,15 +13,17 @@ import xml.etree.ElementTree as ET
 ##################################################################################################################################
 
 class agTestParse:
-    testlist = []
-    #Constructor
-    def __init__(self, test_file):
-        assert(test_file != "")
-        self.test_file = test_file
-        self.errs = 0
 
+    #Constructor
+    def __init__(self, folder, testfile):
+        self.testfile = testfile
+        self.topfolder = folder
+        self.testlist = []
+        self.errs = 0
+        currentfolder = os.getcwd()
+        os.chdir(folder)
         try:
-            self.tree = ET.parse(test_file) 
+            self.tree = ET.parse(testfile) 
             self.root = self.tree.getroot()
         except:
             self.malformedFile(0)
@@ -30,6 +32,7 @@ class agTestParse:
             self.checkFile()
         if(self.errs == 0):
             self.buildTestList()
+        os.chdir(currentfolder)
 
     def malformedFile(self,code):
         f = open('errors.txt', 'a')
@@ -45,7 +48,6 @@ class agTestParse:
         self.errs = 1
             
     def checkFile(self):
-        # TODO: Revise this
         if(self.root.tag != "TESTS"):
             self.malformedFile(1)
         else:
@@ -60,8 +62,6 @@ class agTestParse:
                     else:
                         if(arg.attrib["name"] == None):
                             self.malformedFile(2)
-                     
-                        
 
     def buildTestList(self):
         for test in self.root:
@@ -78,7 +78,7 @@ class agTestParse:
     def getErrs(self):
         return(self.errs)
         
-    def getTests(self):
+    def getTestList(self):
         return(self.testlist)
 
 # End Class ParseXML

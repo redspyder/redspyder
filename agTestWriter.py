@@ -1,43 +1,37 @@
 import agTemplateParse
-import agTestParse
 import os
-import shutil
+
 ##################################################################################################################################
 # Class agTestWriter
 # Author: Jeff Toy
-# Usage:
-#   agTestWriter(folder,template xml file,test xml file).outputTestFile()
-#       folder: folder containint template xml file and test xml file
-#       template xml File: xml file of students command line arguments
-#       test xml file: xml file of tests defined by instructor
+# Description:
+#   agTestWriter creates a file named tests.txt in a students subfolder with one command with appropriate flags per line.
+# Input:
+#   student folder and test list output from agTestParse
 # output:
 #   tests.txt, a text file containing a list of commands to execute tests of student submission
+# preconditions:
+#   existence of template.xml file in student folder
+# Usage:
+#   See example usage at end of file
 ##################################################################################################################################
 
 class agTestWriter:
 
     # Constructor
-    def __init__(self, folder, template_xml, test_xml):
-        assert(folder != "")
-        assert(template_xml != "")
-        assert(test_xml != "")
+    def __init__(self):
         self.commandList = []
-        self.template_xml = template_xml
-        self.test_xml = test_xml
-        self.errs = 0
-        self.folder = os.path.abspath('%s' % folder)
-        shutil.copy('test.xml', '%s/test.xml' % self.folder)
 
-        self.createTestCommandList()
-        self.outputTestFile()
-
-    def createTestCommandList(self):
-        template = agTemplateParse.agTemplateParse("template.xml")
-        tests = agTestParse.agTestParse("test.xml")
-        if(template.getErrs()==0 and tests.getErrs()==0):
-            for test in tests.getTests():
-                self.commandList.append(self.getTestCommand(template.getTemplateDict(), test))
-
+    def createTestFile(self, folder, testlist):
+        self.commandList = []
+        currentfolder = os.getcwd()
+        os.chdir(folder)
+        template = agTemplateParse.agTemplateParse("template.xml")     
+        for test in testlist:
+            teststring = self.getTestString(template,test)
+            self.commandList.append(teststring)
+        self.outputTestFile()        
+        os.chdir(currentfolder)
 
     def outputTestFile(self):
         f = open('tests.txt', 'w')
@@ -45,17 +39,18 @@ class agTestWriter:
             f.write(cmd+"\n")
         f.close()
     
-    
-    def getTestCommand(self,tmplDict, test):
-        command = tmplDict["Program"] + " "
+    def getTestString(self,tmpl, test):
+        command = tmpl.getProgramName() + " "
         for arg in test:    
             if(arg[1] != None):
-                command += tmplDict[arg[0]] + " " + arg[1] + " "
+                command += tmpl.getFlag(arg[0]) + " " + arg[1] + " "
             else:
-                command += tmplDict[arg[0]] + arg[1] + " "
+                command += tmpl.getFlag(arg[0]) + arg[1] + " "
         return(command)                
 
-#example usage:
-#r = agTestWriter("./TestWriter","template.xml","test.xml").outputTestFile()
+## example usage:
+#r = agTestWriter()
+#r.createTestFile("Student1",[[('LIST_CONTENTS_SHORT', 'blah'), ('LIST_CONTENTS_LONG', '')]])
+
 
 

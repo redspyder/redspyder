@@ -24,6 +24,7 @@ class agTemplateParse:
             self.root = self.tree.getroot()
         except:
             self.malformedFile(0)
+            
         if(self.errs == 0):
             self.checkFile()
         if(self.errs == 0):
@@ -31,6 +32,7 @@ class agTemplateParse:
 
     def malformedFile(self,code):
         f = open('errors.txt', 'a')
+        f.write
         if(code == 0):
             f.write("Error code 0, improper xml\n")
         if(code == 1):
@@ -68,9 +70,11 @@ class agTemplateParse:
         for arg in self.root:
             self.templateDict[arg.attrib["name"]] = arg.text
 
-    def getTemplateDict(self):
-        return self.templateDict        
-
+    def getFlag(self,flagdef):
+        return self.templateDict[flagdef]
+    
+    def getProgramName(self):
+        return self.templateDict["Program"]
 
 # End Class ParseTemplate
 #################################################################

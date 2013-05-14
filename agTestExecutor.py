@@ -1,4 +1,5 @@
-import shlex, subprocess
+import shlex, subprocess, os
+import agTimeout
 
 ##################################################################################################################################
 # Class agTestExecutor
@@ -13,23 +14,24 @@ import shlex, subprocess
 class agTestExecutor:
 
     # Constructor
-    def __init__(self, test_file):
-        assert(test_file != "")
-        self.test_file = test_file
+    def __init__(self):
         self.errs = 0
-        self.runTests()
         
-    def runTests(self):
+        
+    def runTests(self, folder, timeout):
+        currentfolder = os.getcwd()
+        os.chdir(folder)
         count = 1
-        f = open(self.test_file,'r')
+        f = open("tests.txt",'r')
         for line in f:
             cmd = shlex.split(line)
             if(len(cmd) > 0):
-                popen = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                out,err = popen.communicate()
-                self.outputFile("Test "+str(count)+":\n"+out+"\n")
+                print("attempting to launch: ",cmd)
+                out = agTimeout.agTimeout(cmd, timeout*60).Run()
+                self.outputFile("Test "+str(count)+":\n"+out[0]+"\n")
                 count += 1
         f.close()
+        os.chdir(currentfolder)
 
     def outputFile(self, out):
         f = open('output.txt', 'a')
@@ -48,6 +50,3 @@ class agTestExecutor:
 # Example usage:
 #r = agTestExecutor("tests.txt")
 
-# Example test file:
-#ls -l
-#ls -a
