@@ -33,9 +33,10 @@ if 2 in args.stage:
 
 ## Stage 3 = testing
 if 3 in args.stage:
-	for s in students:
-		for test in args.test:
-			agTestExecutor(test)
+    for s in students:
+        t_path = args.hw_folder + '/' + s
+        agTestWriter(t_path, args.template, args.test)
+#            agTestExecutor(test)
 
 ## Stage 4 = reporting
 if 4 in args.stage:

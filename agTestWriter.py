@@ -1,6 +1,7 @@
 import agTemplateParse
 import agTestParse
 import os
+import shutil
 ##################################################################################################################################
 # Class agTestWriter
 # Author: Jeff Toy
@@ -21,12 +22,14 @@ class agTestWriter:
         assert(template_xml != "")
         assert(test_xml != "")
         self.commandList = []
-        self.folder = folder
         self.template_xml = template_xml
         self.test_xml = test_xml
         self.errs = 0
-        os.chdir(folder)
+        self.folder = os.path.abspath('%s' % folder)
+        shutil.copy('test.xml', '%s/test.xml' % self.folder)
+
         self.createTestCommandList()
+        self.outputTestFile()
 
     def createTestCommandList(self):
         template = agTemplateParse.agTemplateParse("template.xml")
