@@ -3,32 +3,23 @@ import os, subprocess, time
 ##################################################################################################################################
 # Class agCompile
 # Author: Jeff Toy
-# Usage:
-#   agCompile(Folder, Program Name)
-#       Folder: Top level folder containing student subfolders: e.g. HW3, where: HW3/student1/<assignment files>, etc.
-#       Program Name: Name of the executable expected for the assignment, e.g. myar
+# Description:
+#   Class for running make in a folder
+# Input:
+#   folder containing makefile and code
 # Output:
-#   stdout if problem with parameters
-#   errors.txt in student subfolder if compile errors
-#   output.txt in student subfolder if no compile errors
+#   errors.txt in student subfolder if no makefile
+#   output.txt in student subfolder if makefile, output of make command.
+# Usage:
+#   See example usage at bottom of file
 ##################################################################################################################################
 
 class agCompile:
 
-    def __init__(self, topHwFolder):
-        assert(topHwFolder != "")
-        self.errs = 0
-        self.topFolder = topHwFolder
-#        if(not os.path.isdir(self.topFolder)):
-#            print("Invalid input folder.")
-#            self.errs += 1
-#            return
-            
-        self.folders = self.getSubfolders(self.topFolder)
-        self.makeAll(self.folders)
+    def __init__(self):
+        self.folder = ""
         
     def errorFile(self, err):
-        self.errs += 1
         f = open('errors.txt', 'a')
         f.write(err)
         f.close()
@@ -41,30 +32,20 @@ class agCompile:
         f.write(out)
         f.close()
                 
-    def getSubfolders(self, parentFolder):
-        folderlist = []
-#        os.chdir(parentFolder)
-        students = os.listdir("./")
-        for f in students:
-            if(os.path.isdir(f)):
-                folderlist.append(os.getcwd()+"/"+f)
-        return(sorted(folderlist))
-
-    def makeAll(self, folderlist):
-        for f in folderlist:
-            self.runMake(f)
-                        
     def runMake(self,folder):
+        currentFolder = os.getcwd()
         os.chdir(folder)
         if(os.path.isfile("./makefile") or os.path.isfile("./Makefile")):
-            with open ('output2.txt', 'w') as output:
-                popen = subprocess.Popen(["make"], stdout=output, stderr=output)
-                out,err = popen.communicate()
+            popen = subprocess.Popen(["make"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            out,err = popen.communicate()
+            self.outputFile(out)
+            self.errorFile(err)
         else:
             self.errorFile("Did not find a makefile.\n")
         
-        os.chdir("../")
+        os.chdir(currentFolder)
 
-# Example usage:
-#r = agCompile("/home/jeff/Desktop/HW3", "randomstring")
+## Example usage:
+#r = agCompile()
+#r.runMake("student1")
 

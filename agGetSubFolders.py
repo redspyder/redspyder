@@ -17,13 +17,13 @@ class agGetSubFolders:
 
     def __init__(self,folder):
         assert(folder != "")
-        self.topFolder = folder
+        self.folderList = []
         currentFolder = os.getcwd()
-        if(not os.path.isdir(self.topFolder)):
+        print folder
+        if(not os.path.isdir(folder)):
             print("Invalid input folder.")
             return
-        self.folderList = []
-        os.chdir(self.topFolder)
+        os.chdir(folder)
         folderContents = os.listdir("./")
         for f in folderContents:
             if(os.path.isdir(f)):
