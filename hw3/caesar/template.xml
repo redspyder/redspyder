@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<PROGRAM name="prog">
-  <ARGUMENT name="LIST_CONTENTS_SHORT">-t</ARGUMENT>
-  <ARGUMENT name="LIST_CONTENTS_LONG">--terse</ARGUMENT>
-</PROGRAM>
