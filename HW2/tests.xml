@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<TESTS>
+  <TEST>
+    <ARGUMENT name="TIME_DELAY">5</ARGUMENT>
+    <ARGUMENT name="REPORT_R"></ARGUMENT>
+  </TEST>
+  <TEST>
+    <ARGUMENT name="TIME_DELAY">10</ARGUMENT>
+    <ARGUMENT name="REPORT_S"></ARGUMENT>
+  </TEST>
+</TESTS>
