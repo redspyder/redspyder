@@ -22,15 +22,18 @@ class agTestExecutor:
         currentfolder = os.getcwd()
         os.chdir(folder)
         count = 1
-        f = open("tests.txt",'r')
-        for line in f:
-            cmd = shlex.split(line)
-            if(len(cmd) > 0):
-                print("attempting to launch: ",cmd)
-                out = agTimeout.agTimeout(cmd, timeout*60).Run()
-                self.outputFile("Test "+str(count)+":\n"+out[0]+"\n")
-                count += 1
-        f.close()
+        if(os.path.isfile("tests.txt")):
+            f = open("tests.txt",'r')
+            for line in f:
+                cmd = shlex.split(line)
+                if(len(cmd) > 0):
+                    prog = cmd[0]
+                    cmd[0] = "./"+prog
+                    print("attempting to launch: ",cmd)
+                    out = agTimeout.agTimeout(cmd, timeout).Run()
+                    self.outputFile("Test "+str(count)+":\n"+out[0]+"\n")
+                    count += 1
+            f.close()
         os.chdir(currentfolder)
 
     def outputFile(self, out):

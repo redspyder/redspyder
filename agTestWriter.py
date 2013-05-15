@@ -26,11 +26,12 @@ class agTestWriter:
         self.commandList = []
         currentfolder = os.getcwd()
         os.chdir(folder)
-        template = agTemplateParse.agTemplateParse("template.xml")     
-        for test in testlist:
-            teststring = self.getTestString(template,test)
-            self.commandList.append(teststring)
-        self.outputTestFile()        
+        template = agTemplateParse.agTemplateParse("template.xml") 
+        if(template.getErrs() == 0):    
+            for test in testlist:
+                teststring = self.getTestString(template,test)
+                self.commandList.append(teststring)
+            self.outputTestFile()        
         os.chdir(currentfolder)
 
     def outputTestFile(self):

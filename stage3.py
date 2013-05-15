@@ -21,4 +21,4 @@ def run(folder, timeout, testfile):
         exe.runTests(folder, timeout)               #run each line in test.txt file in folder with timeout
 
 ## for testing stage 3, uncomment the next line, modify the argument appropriately and run this file:
-run("HW2",15,"tests.xml")
+#run("HW2",7,"tests.xml")

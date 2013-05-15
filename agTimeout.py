@@ -1,4 +1,4 @@
-import subprocess, threading
+import subprocess, threading, os
 
 ##################################################################################################################################
 # Class agTimeout
@@ -15,6 +15,7 @@ class agTimeout(threading.Thread):
     def __init__(self, cmd, timeout):
         threading.Thread.__init__(self)
         self.cmd = cmd
+        print os.getcwd()
         self.timeout = timeout
         self.out = ""
         self.err = ""
