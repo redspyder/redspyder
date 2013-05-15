@@ -3,10 +3,11 @@
 #include <stdio.h>
 
 
-void tflag(char *sleeptime){
-    printf("-t flag output.\nWaiting %d seconds\n",atoi(sleeptime));
+
+void tflag(int sleeptime){
+    printf("-t flag output.\nWaiting %d seconds\n",sleeptime);
     
-    sleep(atoi(sleeptime));
+    sleep(sleeptime);
     return;
 }
 
@@ -20,23 +21,21 @@ void sflag(){
     return;
 }
 
-
-
 int main(int argc, char *argv[]){
-    int i;
+    int opt;
     
-    for(i=1; i<argc; i++){
-//        printf("argument %d: %s\n",i,argv[i]);
-        if(!strcmp(argv[i], "-t")){
-            i++;
-            tflag(argv[i]);
+    while((opt = getopt(argc, argv, "srt:")) != -1){
+        switch(opt){
+            case 't':
+                tflag(atoi(optarg));
+                break;
+            case 'r':
+                rflag();
+                break;
+            case 's':
+                sflag();
+                break;
         }
-        if(!strcmp(argv[i], "-r"))
-            rflag();
-            
-        if(!strcmp(argv[i], "-s"))
-            sflag();
-        
     }
     return(0);
 }
