@@ -17,19 +17,17 @@ class agTestExecutor:
     def __init__(self):
         self.errs = 0
         
-        
     def runTests(self, folder, timeout):
         currentfolder = os.getcwd()
         os.chdir(folder)
         count = 1
-        if(os.path.isfile("tests.txt")):
-            f = open("tests.txt",'r')
+        if(os.path.isfile(TEST_COMMAND_FILE)):
+            f = open(TEST_COMMAND_FILE,'r')
             for line in f:
                 cmd = shlex.split(line)
                 if(len(cmd) > 0):
                     prog = cmd[0]
                     cmd[0] = "./"+prog
-                    print("attempting to launch: ",cmd)
                     out = agTimeout.agTimeout(cmd, timeout).Run()
                     self.outputFile("Test "+str(count)+":\n"+out[0]+"\n")
                     count += 1
@@ -37,14 +35,8 @@ class agTestExecutor:
         os.chdir(currentfolder)
 
     def outputFile(self, out):
-        f = open('output.txt', 'a')
+        f = open(STAGE3_OUTFILE, 'a')
         f.write(out)
-        f.close()
-
-    def errorFile(self, err):
-        self.errs += 1
-        f = open('errors.txt', 'a')
-        f.write(err)
         f.close()
 
     def getErrors(self):

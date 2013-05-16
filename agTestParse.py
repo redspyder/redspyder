@@ -9,7 +9,7 @@ import os
 # return:
 #   List of lists of test arguments, one per test: [["LIST_CONTENTS_SHORT","LIST_CONTENTS_LONG"],[],..], e.g. {"LIST_CONTENTS_SHORT":"-t"}
 # output:
-#   errors.txt if xml file is incorrect
+#   STAGE3_OUTFILE if xml file is incorrect
 ##################################################################################################################################
 
 class agTestParse:
@@ -35,7 +35,7 @@ class agTestParse:
         os.chdir(currentfolder)
 
     def malformedFile(self,code):
-        f = open('errors.txt', 'a')
+        f = open(STAGE3_OUTFILE, 'a')
         if(code == 0):
             f.write("Error code 0, improper xml\n")
         if(code == 1):

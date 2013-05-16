@@ -26,7 +26,7 @@ class agTestWriter:
         self.commandList = []
         currentfolder = os.getcwd()
         os.chdir(folder)
-        template = agTemplateParse.agTemplateParse("template.xml") 
+        template = agTemplateParse.agTemplateParse(STUDENT_XML) 
         if(template.getErrs() == 0):    
             for test in testlist:
                 teststring = self.getTestString(template,test)
@@ -35,7 +35,7 @@ class agTestWriter:
         os.chdir(currentfolder)
 
     def outputTestFile(self):
-        f = open('tests.txt', 'w')
+        f = open(TEST_COMMAND_FILE, 'w')
         for cmd in self.commandList:
             f.write(cmd+"\n")
         f.close()

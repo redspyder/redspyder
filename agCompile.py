@@ -1,5 +1,5 @@
 import os, subprocess, time
-
+import agSettings
 ##################################################################################################################################
 # Class agCompile
 # Author: Jeff Toy
@@ -19,29 +19,19 @@ class agCompile:
     def __init__(self):
         self.folder = ""
         
-    def errorFile(self, err):
-        f = open('errors.txt', 'a')
-        f.write(err)
-        f.close()
-
-    def getErrors(self):
-        return(self.errs)
-        
     def outputFile(self, out):
-        f = open('output.txt', 'a')
+        f = open(STAGE2_OUTFILE, 'a')
         f.write(out)
         f.close()
                 
     def runMake(self,folder):
         currentFolder = os.getcwd()
         os.chdir(folder)
-        if(os.path.isfile("./makefile") or os.path.isfile("./Makefile")):
-            popen = subprocess.Popen(["make"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            out,err = popen.communicate()
-            self.outputFile(out)
-            self.errorFile(err)
+        if(os.path.isfile(MAKEFILE_NAMES[0]) or os.path.isfile(MAKEFILE_NAMES[1])):
+            popen = subprocess.Popen([COMPILE_COMMAND])
+            popen.communicate()
         else:
-            self.errorFile("Did not find a makefile.\n")
+            self.outputFile(ERROR1)
         
         os.chdir(currentFolder)
 
