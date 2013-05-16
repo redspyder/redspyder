@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 import os
+import agSettings
 ##################################################################################################################################
 # Class agTestParse
 # Author: Jeff Toy

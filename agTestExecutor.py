@@ -1,6 +1,6 @@
 import shlex, subprocess, os
 import agTimeout
-
+import agSettings
 ##################################################################################################################################
 # Class agTestExecutor
 # Author: Jeff Toy
