@@ -4,7 +4,7 @@ import sys
 ##import stage2
 ##import stage3
 ##import stage4
-
+##import uploader
 
 args = argumentParser.ParseArgs()
 
@@ -41,3 +41,8 @@ if 4 in args.getStage():
 	print "---stage4---\n"
 	print args.getFolder()
 	##stage4.run(args.getFolder())
+
+## Upload if needed
+if (1 in args.getStage() or 2 in args.getStage() or 3 in args.getStage()):
+	print "uploading to db"
+	##uploader()
