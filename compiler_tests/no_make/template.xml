@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<PROGRAM name="prog419">
+  <ARGUMENT name="TIME_DELAY">-t</ARGUMENT>
+  <ARGUMENT name="REPORT_R">-r</ARGUMENT>
+  <ARGUMENT name="REPORT_S">-s</ARGUMENT>
+</PROGRAM>
