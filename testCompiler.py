@@ -14,7 +14,7 @@ class PositiveTestCase(unittest.TestCase):
 		compile = agCompile.agCompile()
 		compile.runMake(GOOD_FOLDER)
 		files = os.listdir(GOOD_FOLDER)
-		check = ['output2.txt','proj419']
+		check = ['stage2.out','proj419']
 		for c in check:
 			self.assertIn(c, files)
 		
@@ -23,10 +23,9 @@ class EmptyFolderTestCase(unittest.TestCase):
 		compile = agCompile.agCompile()
 		compile.runMake(EMPTY_FOLDER)
 		files = os.listdir(EMPTY_FOLDER)
-		check = 'errors2.txt'
-		checkNot = ['output2.txt', 'proj419']
-		for c in checkNot:
-			self.assertNotIn(c, files)
+		check = 'stage2.out'
+		checkNot = 'proj419'
+		self.assertNotIn(checkNot, files)
 		self.assertIn(check, files)
 
 class BadMakefileFolder(unittest.TestCase):
@@ -34,10 +33,9 @@ class BadMakefileFolder(unittest.TestCase):
 		compile = agCompile.agCompile()
 		compile.runMake(BAD_MAKE)
 		files = os.listdir(EMPTY_FOLDER)
-		check = 'errors2.txt'
-		checkNot = ['output2.txt', 'proj419']
-		for c in checkNot:
-			self.assertNotIn(c, files)
+		check = 'stage2.out'
+		checkNot = 'proj419'
+		self.assertNotIn(checkNot, files)
 		self.assertIn(check, files)
 
 class MissingMakefileCase(unittest.TestCase):
@@ -45,10 +43,9 @@ class MissingMakefileCase(unittest.TestCase):
 		compile = agCompile.agCompile()
 		compile.runMake(NO_MAKE)
 		files = os.listdir(EMPTY_FOLDER)
-		check = 'errors2.txt'
-		checkNot = ['output2.txt', 'proj419']
-		for c in checkNot:
-			self.assertNotIn(c, files)
+		check = 'stage2.out'
+		checkNot = 'proj419'
+		self.assertNotIn(checkNot, files)
 		self.assertIn(check, files)
 		
 if __name__ == '__main__':
