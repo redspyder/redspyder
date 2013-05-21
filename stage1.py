@@ -9,4 +9,4 @@ def run(folder):
     for folder in folders:
         decompressor.decompress(folder)
 
-run("hw3");
+run("not_tarfile/Archive.zip");

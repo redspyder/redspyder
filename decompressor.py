@@ -5,7 +5,7 @@ import os
 import tarfile
 
 def decompress(path):
-    output = open("output.txt", "w")
+    output = open("stage1.out", "w")
     sys.stdout = output
     sys.stderr = output
 
@@ -19,9 +19,20 @@ def decompress(path):
         dir_path = os.path.dirname(path)
 			
         if (tarfile.is_tarfile(path)):
-            tarfile.open(path, 'r:bz2').extractall(dir_path)
-            print("Stage 1: decompressed %s" % dir_path)
-            open("output1.txt", "w")
-            os.renames("output.txt", "%s/output1.txt" % dir_path)
+            try:
+                tar = tarfile.open(path, 'r:bz2')
+                tar.errorlevel == 2
+                tar.extractall(dir_path)
+                tar.close()
+                
+                print("Stage 1: decompressed %s" % dir_path)
+                os.renames("stage1.out", "%s/stage1.out" % dir_path)
+                success = open("stage1.success", "w")
+                success.close()
+
+            except tarfile.TarError:
+                print "Error extracting tarfile..."
+        else:
+            print "File is not a tarfile..."
 
     output.close()
