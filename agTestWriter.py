@@ -1,6 +1,6 @@
 import agTemplateParse
 import os
-import agSettings
+from agSettings import *
 ##################################################################################################################################
 # Class agTestWriter
 # Author: Jeff Toy

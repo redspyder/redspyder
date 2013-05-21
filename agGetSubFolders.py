@@ -19,7 +19,6 @@ class agGetSubFolders:
         assert(folder != "")
         self.folderList = []
         currentFolder = os.getcwd()
-        print folder
         if(not os.path.isdir(folder)):
             print("Invalid input folder.")
             return

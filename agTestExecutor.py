@@ -1,6 +1,6 @@
 import shlex, subprocess, os
 import agTimeout
-import agSettings
+from agSettings import *
 ##################################################################################################################################
 # Class agTestExecutor
 # Author: Jeff Toy
@@ -29,7 +29,7 @@ class agTestExecutor:
                     prog = cmd[0]
                     cmd[0] = "./"+prog
                     out = agTimeout.agTimeout(cmd, timeout).Run()
-                    self.outputFile("Test "+str(count)+":\n"+out[0]+"\n")
+                    self.outputFile("Test "+str(count)+":\n"+out[0]+"\n"+out[1]+"\n")
                     count += 1
             f.close()
         os.chdir(currentfolder)

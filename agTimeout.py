@@ -32,9 +32,9 @@ class agTimeout(threading.Thread):
         self.join(self.timeout)
 
         if self.is_alive():
-            print("taking too long, terminating it.")
             self.p.terminate()
             self.join()
+            return["","Taking too long, test terminated."]
         return [self.out,self.err]
         
 # Example usage: (runs sleep for 5 seconds, timeout in 4 seconds)

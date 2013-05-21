@@ -10,4 +10,4 @@ def run(folder):
         c.runMake(folder)
 
 ## for testing stage 2, uncomment the next line, modify the argument appropriately and run this file:
-#run("HW2")
+run("HW2")

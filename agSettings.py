@@ -19,7 +19,7 @@ STAGE4_SUCCESS = "stage4.success"
 
 # Stage 2 Constants
 MAKEFILE_NAMES = ["./makefile","./Makefile"]
-COMPILE_COMMAND = "make > " + STAGE2_OUTFILE + ">&1"
+COMPILE_COMMAND = "make"
 ERROR1 = "Did not find a makefile.\n"
 
 # Stage 3 Constants

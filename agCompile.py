@@ -1,5 +1,5 @@
 import os, subprocess, time
-import agSettings
+from agSettings import *
 ##################################################################################################################################
 # Class agCompile
 # Author: Jeff Toy
@@ -27,15 +27,14 @@ class agCompile:
     def runMake(self,folder):
         currentFolder = os.getcwd()
         os.chdir(folder)
-        if(os.path.isfile(MAKEFILE_NAMES[0]) or os.path.isfile(MAKEFILE_NAMES[1])):
-            popen = subprocess.Popen([COMPILE_COMMAND])
-            popen.communicate()
-        else:
-            self.outputFile(ERROR1)
-        
+        popen = subprocess.Popen([COMPILE_COMMAND],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        out,err = popen.communicate()
+        self.outputFile(out)
+        self.outputFile(err)
         os.chdir(currentFolder)
+        
 
 ## Example usage:
 #r = agCompile()
-#r.runMake("student1")
+#r.runMake("HW2/Student1")
 
