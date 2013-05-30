@@ -4,33 +4,35 @@ import unittest
 import sys
 
 class TestArgumentParser(unittest.TestCase):
-	
-	def setUp(self):
-		self.var = "blah"
 
+	def setUp(self):
+		self.var = "setup section"
+		
 	def test_hwFolder(self):
-		self.assertEqual(parse.getFolder(), self.getCommandLineFolder()[0])
+		sys.argv = ["autograder.py", "H3453"]
+		parse = argumentParser.ParseArgs()
+		self.assertEqual(parse.getFolder(), "H3453")
 
 	def test_stage(self):
-		self.assertEqual(self.var, "blah")
+		sys.argv = ["autograder.py", "H3453","--stage=1"]
+		parse = argumentParser.ParseArgs()
+		self.assertEqual(parse.getStage(), [1])
+		sys.argv = ["autograder.py", "H3453","--stage=1","--stage=2"]
+		parse = argumentParser.ParseArgs()
+		self.assertEqual(parse.getStage(), [1,2])
 
 	def test_timeout(self):
-		self.assertEqual(self.var, "blah")
+		sys.argv = ["autograder.py", "H3453","--timeout=1"]
+		parse = argumentParser.ParseArgs()
+		self.assertEqual(parse.getTimeout(), 1)
 
 	def test_testFile(self):
-		self.assertEqual(self.var, "blah")
+		sys.argv = ["autograder.py", "H3453","--test=test.xml"]
+		parse = argumentParser.ParseArgs()
+		self.assertEqual(parse.getTest(), "test.xml")
 
-	def test_template(self):
-		self.assertEqual(self.var, "blah")
-
-	def getCommandLineFolder(self):
-		return(argslist)
-		
 if __name__ == '__main__':
-	argslist = ['HW2','--stage=1', '--timeout=10', '--test=tests.xml']
-	for arg in argslist:
-		sys.argv.append(arg)
-	print sys.argv
-	parse = argumentParser.ParseArgs()
-	del sys.argv[1:]
 	unittest.main()		
+
+
+
