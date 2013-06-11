@@ -1,6 +1,6 @@
 import argumentParser
 import sys
-##import stage1
+import stage1
 ##import stage2
 ##import stage3
 ##import stage4
@@ -18,7 +18,7 @@ if args.getStage() == []:
 if 1 in args.getStage():
     print "---stage1---\n"
     print args.getFolder()
-    ##stage1.run(args.getFolder())
+    stage1.run(args.getFolder())
 	## if error that prevents continuation occurs, exit program
 	
 ## Stage 2 = compilation

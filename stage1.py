@@ -5,7 +5,8 @@ import decompressor
 def run(folder):
     gf = agGetSubFolders.agGetSubFolders(folder)
     folders = gf.getFolders()
-    for folder in folders:
-        decompressor.decompress(folder)
+    for fold in folders:
+        print 'extracting %s' % fold
+        decompressor.decompress(fold)
 
-run("not_tarfile/Archive.zip");
+#run("not_tarfile/Archive.zip");
