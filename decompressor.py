@@ -3,6 +3,7 @@
 import sys
 import os
 import tarfile
+import string
 
 def decompress(path):
     output = open("stage1.out", "w")
