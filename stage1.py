@@ -1,3 +1,7 @@
+import sys
+import os
+import tarfile
+
 import agCompile
 import agGetSubFolders
 import decompressor
@@ -5,8 +9,10 @@ import decompressor
 def run(folder):
     gf = agGetSubFolders.agGetSubFolders(folder)
     folders = gf.getFolders()
+    print folders
     for fold in folders:
         print 'extracting %s' % fold
         decompressor.decompress(fold)
+        print 'completed extraction: %s' % fold
 
-#run("not_tarfile/Archive.zip");
+run("hw3");
