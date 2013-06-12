@@ -26,12 +26,18 @@ class agTestWriter:
         self.commandList = []
         currentfolder = os.getcwd()
         os.chdir(folder)
-        template = agTemplateParse.agTemplateParse(STUDENT_XML) 
-        if(template.getErrs() == 0):    
-            for test in testlist:
-                teststring = self.getTestString(template,test)
-                self.commandList.append(teststring)
-            self.outputTestFile()        
+        self.outputFile("\n-------------Begin Stage 3----------------\n")
+        if(self.checkPreviousStage(STAGE2_SUCCESS)):
+            template = agTemplateParse.agTemplateParse(STUDENT_XML) 
+            if(template.getErrs() == 0):    
+                for test in testlist:
+                    teststring = self.getTestString(template,test)
+                    self.commandList.append(teststring)
+                self.outputTestFile()        
+            else:
+                self.outputFile('Errors in template.xml File\n')
+        else:
+            self.outputFile('Stage 2 Not Completed\n')
         os.chdir(currentfolder)
 
     def outputTestFile(self):
@@ -39,6 +45,16 @@ class agTestWriter:
         for cmd in self.commandList:
             f.write(cmd+"\n")
         f.close()
+
+    def outputFile(self, out):
+        f = open(STAGE3_OUTFILE, 'a')
+        f.write(out)
+        f.close()
+
+    def checkPreviousStage(self, filename):
+        if(os.path.isfile(filename)):
+            return(True)
+        return(False)
     
     def getTestString(self,tmpl, test):
         command = tmpl.getProgramName() + " "

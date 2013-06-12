@@ -8,7 +8,7 @@ def reporter(student, assn):
 	try:
 		con = mdb.connect(host='mysql.cs.orst.edu', user='cs419_haroldl', passwd='8091', db='cs419_haroldl')
 		cursor = con.cursor()
-		cursor.execute("SELECT stage1, stage2, stage3 FROM Report WHERE sid='%s' AND aid='%s'" % (student, assn))
+		cursor.execute("SELECT stage1, stage2, stage3 FROM Reports WHERE sid='%s' AND aid='%s'" % (student, assn))
 		
 		rows = cursor.fetchall()
 		fd = open('report.txt','a')
