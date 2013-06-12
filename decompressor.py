@@ -46,12 +46,14 @@ def decompress(path):
 
             except:
                 print "Error extracting tarfile..."
+                os.renames("stage1.out", "%s/stage1.out" % dir_path)
         else:
             print "File is not a tarfile..."
+            os.renames("stage1.out", "%s/stage1.out" % dir_path)
 
     output.close()
     sys.stdout = old_stdout
     sys.stderr = old_stderr
     print 'completed decompressing...'
 
-#decompress('hw3/jack')
+decompress('hw3/jack')
