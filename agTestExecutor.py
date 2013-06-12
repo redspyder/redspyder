@@ -32,6 +32,9 @@ class agTestExecutor:
                     self.outputFile("Test "+str(count)+":\n"+out[0]+"\n"+out[1]+"\n")
                     count += 1
             f.close()
+            self.outputFile("-------------End Stage 3------------------\n")
+        else:
+            self.outputFile('Failed to create tests.txt\n')
         os.chdir(currentfolder)
 
     def outputFile(self, out):
