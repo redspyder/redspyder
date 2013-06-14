@@ -8,5 +8,4 @@ def run(folder):
     for f in folders:
         c.runMake(f)
 
-## for testing stage 2, uncomment the next line, modify the argument appropriately and run this file:
-#run("HW2")
+
