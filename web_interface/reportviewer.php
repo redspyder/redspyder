@@ -29,6 +29,10 @@ table td, th {
 	border-width: thin;
 	border-collapse: collapse;
 }
+.stage {
+	max-width: 350px;
+	text-wrap: true;
+}
 </style>
 </head>
 <body>
@@ -64,8 +68,8 @@ table td, th {
 		// for each result
 		echo '<h3>'.htmlspecialchars($row['aid']).'</h3>';
 		echo '<div><table id="report">
-	<tr><th>Stage 1</th><th>Stage 2</th><th>Stage 3</th></tr>
-	<tr><td>'.$row['stage1'].'</td><td>'.$row['stage2'].'</td><td>'.$row['stage3'].'</td></tr>
+	<tr><th>Stage 1</th><th>Success?</th><th>Stage 2</th><th>Success?</th><th>Stage 3</th><th>Success?</th></tr>
+	<tr><td class="stage">'.$row['stage1'].'</td><td>'.$row['status1'].'</td><td class="stage">'.$row['stage2'].'</td><td>'.$row['status2'].'</td><td class="stage">'.$row['stage3'].'</td><td>'.$row['status3'].'</td></tr>
 	</table></div>';
 	}
 	
