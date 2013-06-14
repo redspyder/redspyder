@@ -9,10 +9,10 @@ import decompressor
 def run(folder):
     gf = agGetSubFolders.agGetSubFolders(folder)
     folders = gf.getFolders()
-    print folders
+#    print folders
     for fold in folders:
-        print 'extracting %s' % fold
+#        print 'extracting %s' % fold
         decompressor.decompress(fold)
-        print 'completed extraction: %s' % fold
+#        print 'completed extraction: %s' % fold
 
-run("hw3");
+

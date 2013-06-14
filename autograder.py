@@ -5,7 +5,7 @@ import stage2
 import stage3
 import stage3_5
 import stage4
-import uploader
+#import uploader
 
 args = argumentParser.ParseArgs()
 
@@ -16,7 +16,7 @@ if args.getStage() == []:
 ## Stage 1 = decompression
 if 1 in args.getStage():
 	print "---Begin Stage 1---"
-    stage1.run(args.getFolder())
+	stage1.run(args.getFolder())
 	print "---End Stage 1-----"
 	## if error that prevents continuation occurs, exit program
 	
@@ -36,7 +36,7 @@ if 3 in args.getStage():
 ## Stage 3.5 = uploading
 if (1 in args.getStage() or 2 in args.getStage() or 3 in args.getStage()):
 	print "---Begin Stage 3.5---"
-    stage3_5.run(args.getFolder())
+	stage3_5.run(args.getFolder())
 	print "---End Stage 3.5-----"
 
 ## Stage 4 = reporting

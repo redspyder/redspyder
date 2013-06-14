@@ -5,12 +5,13 @@ import os
 import tarfile
 
 def decompress(path):
-    print 'starting decompress'
+#    print 'starting decompress'
     output = open("stage1.out", "w")
     old_stdout = sys.stdout
     old_stderr = sys.stderr
     sys.stdout = output
     sys.stderr = output
+    print "\n-------------Begin Stage 1----------------\n"
 
     if os.path.isdir(path):
         print 'directory detected: %s' % path
@@ -50,10 +51,10 @@ def decompress(path):
         else:
             print "File is not a tarfile..."
             os.renames("stage1.out", "%s/stage1.out" % dir_path)
-
+    print "\n-------------End Stage 1------------------\n"
     output.close()
     sys.stdout = old_stdout
     sys.stderr = old_stderr
-    print 'completed decompressing...'
+#    print 'completed decompressing...'
 
 decompress('hw3/jack')
