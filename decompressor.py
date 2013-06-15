@@ -7,19 +7,22 @@ import tarfile
 def decompress(path):
     print 'starting decompress'
     output = open("stage1.out", "w")
-#    old_stdout = sys.stdout
-#    old_stderr = sys.stderr
-#    sys.stdout = output
-#    sys.stderr = output
+    old_stdout = sys.stdout
+    old_stderr = sys.stderr
+    sys.stdout = output
+    sys.stderr = output
     print "\n-------------Begin Stage 1----------------\n"
 
     if os.path.isdir(path):
         print 'directory detected: %s' % path
         dir_list = os.listdir(path)
 
-        for dir in dir_list:
-            dir_path = os.path.join(path, dir)
-            decompress(dir_path)
+        if dir_list:
+            for dir in dir_list:
+                dir_path = os.path.join(path, dir)
+                decompress(dir_path)
+        else:
+            print 'directory is empty'
 	
     elif os.path.isfile(path):
         print 'file detected: %s' % path
@@ -55,16 +58,16 @@ def decompress(path):
 
     print "\n-------------End Stage 1------------------\n"
     
-    output.close()
+    full_path = os.getcwd() + '/' + path
     if os.path.isdir(path):
-        if not os.listdir(path):
-            print 'empty directory: %s' % path
+        if not os.listdir(full_path):
+            print 'empty directory: %s' % full_path
             dir_path = os.path.dirname(path)
-            print 'directory name: %s' % dir_path
             os.renames("stage1.out", "%s/stage1.out" % path)
 
-#    sys.stdout = old_stdout
-#    sys.stderr = old_stderr
+    output.close()
+    sys.stdout = old_stdout
+    sys.stderr = old_stderr
     print 'completed decompressing...'
 
-#decompress('hw3/fake')
+#decompress('hw3')
