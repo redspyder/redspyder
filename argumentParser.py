@@ -10,10 +10,11 @@ class ParseArgs:
 		parser.add_argument('--stage', help='which stage of autograder to run',
                             type=int, action='append')
 		parser.add_argument('--timeout', help='timeout for autograder'
-                            '(in minutes)', type=int)
+                            '(in minutes)', type=int, required=True)
 #		parser.add_argument('--test', help='test file to run on assignment',
 #        action='append', type=argparse.FileType('r'))
-		parser.add_argument('--test', help='test file to run on assignment')
+		parser.add_argument('--test', help='test file to run on assignment',
+                            required=True)
 		args = parser.parse_args()
 
 		if (args.stage):
