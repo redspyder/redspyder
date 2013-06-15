@@ -60,7 +60,7 @@ def decompress(path):
     
     full_path = os.getcwd() + '/' + path
     if os.path.isdir(path):
-        if not os.listdir(full_path):
+        if not os.listdir(path):
             print 'empty directory: %s' % full_path
             dir_path = os.path.dirname(path)
             os.renames("stage1.out", "%s/stage1.out" % path)
@@ -70,4 +70,4 @@ def decompress(path):
     sys.stderr = old_stderr
     print 'completed decompressing...'
 
-#decompress('hw3')
+decompress('hw3')
